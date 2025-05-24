@@ -5,6 +5,7 @@ A high-fidelity, fully-responsive clone of the Internshala Internship Search Pag
 > Developed by **Tirthesh Jain**
 
 ---
+## Live URL: [https://tirtheshjaininternshala.netlify.app/](https://tirtheshjaininternshala.netlify.app/)
 
 ## 🚀 Tech Stack
 
