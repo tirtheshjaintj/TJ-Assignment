@@ -51,14 +51,14 @@ const InternshipCard: React.FC<InternshipCardProps> = ({ internship }) => {
         <motion.div
             transition={{ delay: 0.1 }}
             whileHover={{ scale: 1.01 }}
-            className="bg-white p-4 my-4  cursor-pointer rounded-2xl shadow-sm hover:shadow-md transition w-full flex relative justify-between items-center "
+            className="bg-white dark:bg-gray-800 dark:text-white p-4 my-4  cursor-pointer rounded-2xl shadow-sm hover:shadow-md transition w-full flex relative justify-between items-center "
         >
             <div className="flex flex-col gap-2 w-full">
                 {/* Title & Company */}
                 <div className="flex justify-between">
                     <div>
-                        <h3 className="text-sm font-semibold text-gray-800">{profile_name}</h3>
-                        <p className="text-sm text-gray-500">{company_name}</p>
+                        <h3 className="text-sm font-semibold text-gray-800 dark:text-white">{profile_name}</h3>
+                        <p className="text-sm text-gray-500 dark:text-white">{company_name}</p>
                     </div>
                     {/* Company Logo */}
                     <div className="ml-4 shrink-0">
@@ -74,16 +74,16 @@ const InternshipCard: React.FC<InternshipCardProps> = ({ internship }) => {
 
                 {/* Icons Row */}
                 <div className="flex flex-wrap text-xs text-gray-700 gap-6 mt-2">
-                    <span className="flex items-center gap-1">
-                        <FaMapMarkerAlt className="text-gray-400" />
+                    <span className="flex items-center gap-1 dark:text-white">
+                        <FaMapMarkerAlt className="text-gray-400 dark:text-white" />
                         {displayedLocations.join(", ")}
                     </span>
-                    <span className="flex items-center gap-1">
-                        <HiOutlineClock className="text-gray-400" />
+                    <span className="flex items-center gap-1 dark:text-white">
+                        <HiOutlineClock className="text-gray-400 dark:text-white" />
                         {duration}
                     </span>
-                    <span className="flex items-center gap-1">
-                        <FaMoneyBillWave className="text-gray-400" />
+                    <span className="flex items-center gap-1 dark:text-white">
+                        <FaMoneyBillWave className="text-gray-400 dark:text-white" />
                         {displayedStipend}
                     </span>
                 </div>

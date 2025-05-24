@@ -81,6 +81,7 @@ const FilterContent: React.FC<FilterContentProps> = ({
         <label className="block text-sm font-medium mb-1">
           Desired minimum monthly stipend (₹)
         </label>
+        <div className="text-base mt-1">₹{filters.stipend}</div>
         <input
           type="range"
           name="stipend"
@@ -91,13 +92,12 @@ const FilterContent: React.FC<FilterContentProps> = ({
           onChange={handleInputChange}
           className="w-full accent-blue-500"
         />
-        <div className="text-base text-gray-500 mt-1">₹{filters.stipend}</div>
       </div>
 
       {/* View More */}
       <button
         onClick={() => setShowMoreFilters(!showMoreFilters)}
-        className="flex items-center text-blue-600 text-sm my-5"
+        className="flex items-center text-blue-600 dark:text-white text-sm my-5"
       >
         {showMoreFilters ? (
           <>
@@ -164,8 +164,8 @@ const FilterContent: React.FC<FilterContentProps> = ({
       )}
 
       {/* Keyword */}
-      <div className="mt-6 mb-4">
-        <label className="text-sm font-medium block mb-1">Keyword Search</label>
+      <div className="mt-6 mb-4 ">
+        <label className="text-sm  font-medium block mb-1">Keyword Search</label>
         <input
           type="search"
           name="keyword"
@@ -179,7 +179,7 @@ const FilterContent: React.FC<FilterContentProps> = ({
       {/* Clear All */}
       <button
         onClick={clearAllFilters}
-        className="text-blue-600 flex items-center p-2 text-base cursor-pointer float-right pb-2"
+        className="text-blue-600 dark:text-white flex items-center p-2 text-base cursor-pointer float-right pb-2"
       >
         Clear all&nbsp;<FaFilterCircleXmark/>
       </button>
@@ -246,7 +246,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters, prof
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="hidden lg:block w-64 bg-white shadow-md rounded-lg flex-1/3 sticky top-[100px] self-start">
+      <div className="hidden lg:block w-64 bg-white dark:bg-gray-800 shadow-md rounded-lg flex-1/3 sticky top-[100px] self-start">
         <FilterContent
           filters={filters}
           handleCheckboxChange={handleCheckboxChange}
@@ -265,7 +265,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters, prof
           onClick={() => setMobileFilterOpen(true)}
           className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
         >
-          Open Filters <FaFilter/>  
+          Filters <FaFilter/>  
         </button>
       </div>
 
@@ -277,19 +277,19 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters, prof
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={() => setMobileFilterOpen(false)} 
           >
             <motion.div
-              className="w-4/5 bg-white overflow-y-auto h-full p-4"
+              className="w-4/5 bg-white dark:bg-gray-800 relative overflow-y-auto h-full p-4"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
+              onClick={(e) => e.stopPropagation()} 
             >
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-semibold">Filters</h2>
-                <button onClick={() => setMobileFilterOpen(false)}>
-                  <FaTimes size={20} />
+                <button className="absolute right-5 p-2 cursor-pointer" onClick={() => setMobileFilterOpen(false)}>
+                  <FaTimes size={25} />
                 </button>
-              </div>
+             
               <FilterContent
                 filters={filters}
                 handleCheckboxChange={handleCheckboxChange}

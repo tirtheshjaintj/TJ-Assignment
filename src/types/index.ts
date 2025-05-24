@@ -118,4 +118,6 @@ export interface Filters {
     earlyApplicant: boolean;
     forWomen: boolean;
     keyword: string;
+    profiles: string[];  
+    locations: string[];  
 }

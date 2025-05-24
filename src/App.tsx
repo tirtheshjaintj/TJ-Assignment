@@ -94,7 +94,7 @@ const App: React.FC = () => {
       <div className="flex justify-center flex-col items-center">
         <Header />
         <div className="flex w-full lg:w-[956px] justify-start">
-          <span className="text-sm mt-5 p-10 flex items-center">Home&nbsp; {">"} &nbsp;Internships</span>
+          <span className="text-sm mt-5 p-3 md:p-10 flex items-center">Home&nbsp; {">"} &nbsp;Internships</span>
         </div>
         <main className="flex flex-col lg:flex-row lg:w-[956px]">
           <FilterSidebar filters={filters} setFilters={setFilters} profiles={profileSuggestion} locations={locationSuggestion}/>

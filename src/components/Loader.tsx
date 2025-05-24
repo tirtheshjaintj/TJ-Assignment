@@ -6,7 +6,7 @@ const SkeletonCard = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white p-4 m-2 rounded-2xl shadow-sm w-full flex justify-between items-center animate-pulse"
+            className="bg-white dark:bg-gray-800 p-4 m-2 rounded-2xl shadow-sm w-full flex justify-between items-center animate-pulse"
         >
             <div className="flex flex-col gap-2 w-full">
                 {/* Title & Company */}

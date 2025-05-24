@@ -8,12 +8,8 @@ interface TagInputProps {
   onChange: (tags: string[]) => void;
 }
 
-const KeyCodes = {
-  comma: 188,
-  enter: 13,
-};
 
-const delimiters = [KeyCodes.comma, KeyCodes.enter];
+
 
 const TagInput: React.FC<TagInputProps> = ({
   tags,
@@ -83,7 +79,6 @@ const TagInput: React.FC<TagInputProps> = ({
       <ReactTags
         tags={selectedTags}
         suggestions={suggestionTags}
-        delimiters={delimiters}
         handleAddition={handleAddition}
         handleDelete={handleDelete}
         handleInputChange={handleInputChange}
