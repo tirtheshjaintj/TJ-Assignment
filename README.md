@@ -37,8 +37,8 @@ A high-fidelity, fully-responsive clone of the Internshala Internship Search Pag
 - 🎨 **Smooth UI Transitions**  
   Filter animations powered by Framer Motion for an engaging user experience.
 
-- ⚡ **Optimized Performance**  
-  Efficient rendering using React hooks like `useMemo` to minimize unnecessary re-renders.
+- 🌙 **Dark Mode Support**  
+  Seamless toggle between light and dark themes for better user experience.
 
 - 🧠 **Type-Safe Codebase**  
   Robust and scalable interface definitions using TypeScript ensure maintainability.
