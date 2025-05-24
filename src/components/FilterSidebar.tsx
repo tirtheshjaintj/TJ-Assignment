@@ -1,55 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes, FaChevronDown, FaChevronUp, FaFilter } from "react-icons/fa";
-import type { Filters } from "../types"; // Make sure your `Filters` type is accurate
-import {  FaFilterCircleXmark } from "react-icons/fa6";
+import type { Filters } from "../types";
+import { FaFilterCircleXmark } from "react-icons/fa6";
+import TagInput from "./TagInput";
 
-
-interface FilterSidebarProps {
+interface FilterContentProps {
   filters: Filters;
-  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+  handleCheckboxChange: (key: keyof Filters) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  handleProfilesChange: (newProfiles: string[]) => void;
+  handleLocationsChange: (newLocations: string[]) => void;
+  clearAllFilters: () => void;
+  profiles: string[];
+  locations: string[];
 }
 
-const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters }) => {
-  const [isMobileFilterOpen, setMobileFilterOpen] = useState(false);
+const FilterContent: React.FC<FilterContentProps> = ({
+  filters,
+  handleCheckboxChange,
+  handleInputChange,
+  handleProfilesChange,
+  handleLocationsChange,
+  clearAllFilters,
+  profiles,
+  locations
+}) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false);
 
-  const handleCheckboxChange = (key: keyof Filters) => {
-    setFilters((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
-
-  
-  const handleInputChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value} = e.target;
-    setFilters(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  }, [setFilters]);
-  
-  
-
-  const clearAllFilters = () => {
-    setFilters({
-      workFromHome: false,
-      partTime: false,
-      stipend: 0,
-      startDate: "",
-      duration: "",
-      jobOffer: false,
-      fastResponse: false,
-      earlyApplicant: false,
-      forWomen: false,
-      keyword: "",
-    });
-  };
-
-  const FilterContent: React.FC = () => (
+  return (
     <div className="p-4">
       <h2 className="text-lg font-semibold mb-4 flex items-center justify-center"><FaFilter/> Filters</h2>
+      
+      {/* Profiles Tag Input */}
+      <div className="mb-4">
+        <label className="text-sm font-medium block mb-1">Profiles</label>
+        <TagInput
+          tags={filters.profiles}
+          suggestions={profiles}
+          onChange={handleProfilesChange}
+          placeholder="Add job profiles"
+        />
+      </div>
+
+      {/* Locations Tag Input */}
+      <div className="mb-4">
+        <label className="text-sm font-medium block mb-1">Locations</label>
+        <TagInput
+          tags={filters.locations}
+          suggestions={locations}
+          onChange={handleLocationsChange}
+          placeholder="Add locations"
+        />
+      </div>
 
       {/* WFH */}
       <label className="flex items-center mb-3">
@@ -107,58 +110,58 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters }) =>
         )}
       </button>
 
-        {showMoreFilters && (
-          <motion.div
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden"
-          >
-            {/* Start Date */}
-            <div className="mb-4">
-              <label className="text-sm font-medium block mb-1">
-                Starting from (or after)
-              </label>
-              <input
-                type="date"
-                name="startDate"
-                value={filters.startDate}
-                onChange={handleInputChange}
-                className="border border-gray-500/50 rounded p-2 w-full text-sm  block mb-1"
-              />
-            </div>
+      {showMoreFilters && (
+        <motion.div
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          className="overflow-hidden"
+        >
+          {/* Start Date */}
+          <div className="mb-4">
+            <label className="text-sm font-medium block mb-1">
+              Starting from (or after)
+            </label>
+            <input
+              type="date"
+              name="startDate"
+              value={filters.startDate}
+              onChange={handleInputChange}
+              className="border border-gray-500/50 rounded p-2 w-full text-sm block mb-1"
+            />
+          </div>
 
-            {/* Duration */}
-            <div className="mb-4">
-              <label className="text-sm font-medium block mb-1">
-                Max. duration (months)
-              </label>
-              <input
-                type="number"
-                name="duration"
-                value={filters.duration}
-                onChange={handleInputChange}
-                placeholder="eg. 3 Months"
-                className="border border-gray-500/50 focus:outline-blue-400 rounded p-2 w-full  text-sm font-medium block mb-1"
-                min="1"
-              />
-            </div>
+          {/* Duration */}
+          <div className="mb-4">
+            <label className="text-sm font-medium block mb-1">
+              Max. duration (months)
+            </label>
+            <input
+              type="number"
+              name="duration"
+              value={filters.duration}
+              onChange={handleInputChange}
+              placeholder="eg. 3 Months"
+              className="border border-gray-500/50 focus:outline-blue-400 rounded p-2 w-full text-sm font-medium block mb-1"
+              min="1"
+            />
+          </div>
 
-            {/* Extra Checkboxes */}
-            {(["jobOffer", "fastResponse", "earlyApplicant", "forWomen"] as (keyof Filters)[]).map(
-              (key) => (
-                <label key={key} className="flex items-center mb-2 capitalize">
-                  <input
-                    type="checkbox"
-                    className="accent-blue-500 w-4 h-4 mr-2"
-                    checked={(filters[key])?true:false}
-                    onChange={() => handleCheckboxChange(key)}
-                  />
-                  {key.replace(/([A-Z])/g, " $1").trim()}
-                </label>
-              )
-            )}
-          </motion.div>
-        )}
+          {/* Extra Checkboxes */}
+          {(["jobOffer", "fastResponse", "earlyApplicant", "forWomen"] as (keyof Filters)[]).map(
+            (key) => (
+              <label key={key} className="flex items-center mb-2 capitalize">
+                <input
+                  type="checkbox"
+                  className="accent-blue-500 w-4 h-4 mr-2"
+                  checked={(filters[key])?true:false}
+                  onChange={() => handleCheckboxChange(key)}
+                />
+                {key.replace(/([A-Z])/g, " $1").trim()}
+              </label>
+            )
+          )}
+        </motion.div>
+      )}
 
       {/* Keyword */}
       <div className="mt-6 mb-4">
@@ -176,18 +179,84 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters }) =>
       {/* Clear All */}
       <button
         onClick={clearAllFilters}
-        className="text-blue-600 flex items-center  p-2 text-base cursor-pointer float-right pb-2"
+        className="text-blue-600 flex items-center p-2 text-base cursor-pointer float-right pb-2"
       >
         Clear all&nbsp;<FaFilterCircleXmark/>
       </button>
     </div>
   );
+};
+
+interface FilterSidebarProps {
+  filters: Filters;
+  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+  profiles: string[];
+  locations: string[];
+}
+
+const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters, profiles, locations }) => {
+  const [isMobileFilterOpen, setMobileFilterOpen] = useState(false);
+
+  const handleCheckboxChange = useCallback((key: keyof Filters) => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  }, [setFilters]);
+
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFilters(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  }, [setFilters]);
+
+  const handleProfilesChange = useCallback((newProfiles: string[]) => {
+    setFilters((prev) => ({
+      ...prev,
+      profiles: newProfiles,
+    }));
+  }, [setFilters]);
+
+  const handleLocationsChange = useCallback((newLocations: string[]) => {
+    setFilters((prev) => ({
+      ...prev,
+      locations: newLocations,
+    }));
+  }, [setFilters]);
+
+  const clearAllFilters = useCallback(() => {
+    setFilters({
+      workFromHome: false,
+      partTime: false,
+      stipend: 0,
+      startDate: "",
+      duration: "",
+      jobOffer: false,
+      fastResponse: false,
+      earlyApplicant: false,
+      forWomen: false,
+      keyword: "",
+      profiles: [],
+      locations: []
+    });
+  }, [setFilters]);
 
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="hidden lg:block w-64 bg-white shadow-md  rounded-lg flex-1/3 sticky top-[100px] self-start">
-        <FilterContent />
+      <div className="hidden lg:block w-64 bg-white shadow-md rounded-lg flex-1/3 sticky top-[100px] self-start">
+        <FilterContent
+          filters={filters}
+          handleCheckboxChange={handleCheckboxChange}
+          handleInputChange={handleInputChange}
+          handleProfilesChange={handleProfilesChange}
+          handleLocationsChange={handleLocationsChange}
+          clearAllFilters={clearAllFilters}
+          profiles={profiles}
+          locations={locations}
+        />
       </div>
 
       {/* Mobile Filter Button */}
@@ -221,7 +290,16 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters }) =>
                   <FaTimes size={20} />
                 </button>
               </div>
-              <FilterContent />
+              <FilterContent
+                filters={filters}
+                handleCheckboxChange={handleCheckboxChange}
+                handleInputChange={handleInputChange}
+                handleProfilesChange={handleProfilesChange}
+                handleLocationsChange={handleLocationsChange}
+                clearAllFilters={clearAllFilters}
+                profiles={profiles}
+                locations={locations}
+              />
             </motion.div>
           </motion.div>
         )}

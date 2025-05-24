@@ -20,52 +20,84 @@ const App: React.FC = () => {
     earlyApplicant: false,
     forWomen: false,
     keyword: "",
+    profiles:[],
+    locations:[]
   });
+  const [profileSuggestion,setProfileSuggestion]=useState<string[]>([]);
+  const [locationSuggestion,setLocationSuggestion]=useState<string[]>([]);
 
   useEffect(() => {
     let result = internships;
 
-    if (filters.workFromHome)
+    if (filters.workFromHome){
       result = result.filter((i) => i.work_from_home);
-
-    if (filters.partTime)
+    }
+    if (filters.partTime){
       result = result.filter((i) => i.part_time);
-
-    if (filters.stipend > 0)
+    }
+    if (filters.stipend > 0){
       result = result.filter((i) => i.stipend.salaryValue1 >= filters.stipend);
-
-    if (filters.startDate)
+    }
+    if (filters.startDate){
       result = result.filter((i) => new Date(i.start_date1) >= new Date(filters.startDate));
-
-    if (filters.duration)
+    }
+    if (filters.duration){
       result = result.filter((i) =>
         parseInt(i.duration) <= parseInt(filters.duration)
       );
+    }
 
-    if (filters.keyword)
+    if (filters.keyword){
       result = result.filter((i) =>
         `${i.profile_name} ${i.company_name}`.toLowerCase().includes(filters.keyword.toLowerCase())
       );
+    }
 
-    if (filters.jobOffer)
+    if (filters.jobOffer){
       result = result.filter((i) => i.is_ppo);
+    }
+    if (filters.forWomen){
+      result = result.filter((i) => i.job_segments.includes("internship_for_women"));
+    }
 
-    if (filters.forWomen)
-      result = result.filter((i) => i.labels_app_in_card.includes("internships for women"));
+   if (filters.profiles.length > 0) {
+    result = result.filter((i) =>
+      filters.profiles.includes(i.profile_name)
+    );
+   }
 
+  if (filters.locations.length > 0) {
+    result = result.filter((i) =>
+      i.location_names.some((loc) => filters.locations.includes(loc))
+    );
+  }
     setFilteredInternships(result);
   }, [filters, internships]);
+
+  useEffect(() => {
+    const tempProfiles = new Set<string>();
+    const tempLocations = new Set<string>();
+  
+    internships.forEach((internship) => {
+      tempProfiles.add(internship.profile_name);
+      internship.location_names.forEach(location => tempLocations.add(location));
+    });
+  
+    setLocationSuggestion(Array.from(tempLocations));
+    setProfileSuggestion(Array.from(tempProfiles));
+  }, [internships]);
+  
 
   return (
     <>
       <ToastContainer position={"bottom-right"} />
       <div className="flex justify-center flex-col items-center">
         <Header />
-        <div className="flex lg:w-[956px] justify-start">
+        <div className="flex w-full lg:w-[956px] justify-start">
           <span className="text-sm mt-5 p-10 flex items-center">Home&nbsp; {">"} &nbsp;Internships</span>
         </div>
         <main className="flex flex-col lg:flex-row lg:w-[956px]">
-          <FilterSidebar filters={filters} setFilters={setFilters} />
+          <FilterSidebar filters={filters} setFilters={setFilters} profiles={profileSuggestion} locations={locationSuggestion}/>
           <Internships internships={filteredInternships} />
         </main>
       </div>

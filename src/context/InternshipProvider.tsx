@@ -22,14 +22,14 @@ export const InternshipProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
       let internships: Internship[] = [];
       
-      if (import.meta.env.VITE_MODE === "production" || true) {
+      if (import.meta.env.VITE_MODE === "production") {
         const data: InternshipsData = mockData;
         setTimeout(() => {
           internships = data.internship_ids.map(
             (id) => data.internships_meta[id]
           );
         },1500);
-      }{
+      }else{
         const response = await axiosInstance.get<InternshipsData>("/hiring/search");
         const data = response.data;
         internships = data.internship_ids.map(
