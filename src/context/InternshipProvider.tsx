@@ -1,9 +1,9 @@
 // src/context/InternshipContext.tsx
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axiosInstance from "../config/axiosConfig";
-import mockData from "../assets/mock.json";
 import type { Internship, InternshipsData } from "../types";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 interface InternshipContextType {
   internships: Internship[];
@@ -23,15 +23,14 @@ export const InternshipProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       let internships: Internship[] = [];
       
       if (import.meta.env.VITE_MODE === "production") {
-        const data: InternshipsData = mockData;
-        setTimeout(() => {
+        const response = await axios.get("/mock.json");
+        const data:InternshipsData = response.data;
           internships = data.internship_ids.map(
             (id) => data.internships_meta[id]
           );
-        },1500);
       }else{
-        const response = await axiosInstance.get<InternshipsData>("/hiring/search");
-        const data = response.data;
+        const response = await axiosInstance.get("/hiring/search");
+        const data:InternshipsData = response.data;
         internships = data.internship_ids.map(
           (id) => data.internships_meta[id]
         );
