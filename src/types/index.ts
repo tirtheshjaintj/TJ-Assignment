@@ -106,3 +106,16 @@ export interface InternshipsData {
     internships_meta: InternshipsMeta;
     internship_ids: number[];
 }
+
+export interface Filters {
+    workFromHome: boolean;
+    partTime: boolean;
+    stipend: number;
+    startDate: string;
+    duration: string;
+    jobOffer: boolean;
+    fastResponse: boolean;
+    earlyApplicant: boolean;
+    forWomen: boolean;
+    keyword: string;
+}
