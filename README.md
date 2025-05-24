@@ -55,15 +55,15 @@ cd TJ-Assignment
 ```
 ---
 
-# Create a .env file in the root directory with the following content:
+## Create a .env file in the root directory with the following content:
 ```bash
 VITE_BACKEND_URL=/api
 VITE_MODE=development
 ```
-# Install dependencies and start the development server:
+## Install dependencies and start the development server:
 ```bash
 npm install
 npm run dev
 ```
-# Open in your browser [http://localhost:5173](http://localhost:5173).
+## Open in your browser [http://localhost:5173](http://localhost:5173)
 
