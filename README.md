@@ -65,5 +65,5 @@ VITE_MODE=development
 npm install
 npm run dev
 ```
-# Open in your browser.
-[http://localhost:5173](http://localhost:5173)
+# Open in your browser [http://localhost:5173](http://localhost:5173).
+
