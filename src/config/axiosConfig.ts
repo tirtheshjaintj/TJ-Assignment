@@ -3,7 +3,7 @@ import axiosRetry from 'axios-retry';
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
-  timeout: 10000, // 10s timeout to avoid hanging requests
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },

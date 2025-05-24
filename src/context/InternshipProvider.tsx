@@ -4,7 +4,6 @@ import axiosInstance from "../config/axiosConfig";
 import mockData from "../assets/mock.json";
 import type { Internship, InternshipsData } from "../types";
 import { toast } from "react-toastify";
-import axios from "axios";
 
 interface InternshipContextType {
   internships: Internship[];
@@ -22,16 +21,14 @@ export const InternshipProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       setLoading(true);
 
       let internships: Internship[] = [];
-      const data = await axios.get('https://internshala.com/hiring/search');
-      console.log(data);
 
-      if (import.meta.env.VITE_MODE === "development") {
+      if (import.meta.env.VITE_MODE === "production") {
         const data: InternshipsData = mockData;
         internships = data.internship_ids.map(
           (id) => data.internships_meta[id]
         );
       } else {
-        const response = await axiosInstance.get<InternshipsData>("/api/hiring/search");
+        const response = await axiosInstance.get<InternshipsData>("/hiring/search");
         const data = response.data;
         internships = data.internship_ids.map(
           (id) => data.internships_meta[id]
@@ -50,7 +47,9 @@ export const InternshipProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   };
 
   useEffect(() => {
+    console.log("Running");
     fetchInternships();
+
   }, []);
 
   return (
