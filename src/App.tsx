@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 const App: React.FC = () => {
   const { internships, loading } = useInternships();
   useEffect(() => {
-    console.log(internships);
+    console.log(internships, loading);
   }, [internships]);
 
   return <>

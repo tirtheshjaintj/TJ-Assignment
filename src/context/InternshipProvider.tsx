@@ -31,7 +31,7 @@ export const InternshipProvider: React.FC<{ children: React.ReactNode }> = ({ ch
           (id) => data.internships_meta[id]
         );
       } else {
-        const response = await axios.get<InternshipsData>("/api/hiring/search");
+        const response = await axiosInstance.get<InternshipsData>("/api/hiring/search");
         const data = response.data;
         internships = data.internship_ids.map(
           (id) => data.internships_meta[id]
