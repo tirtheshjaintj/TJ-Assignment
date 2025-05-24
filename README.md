@@ -56,8 +56,6 @@ cd TJ-Assignment
 ```
 ---
 
-# Create a .env file in the root directory with the following content:
-=======
 ## Create a .env file in the root directory with the following content:
 ```bash
 VITE_BACKEND_URL=/api
