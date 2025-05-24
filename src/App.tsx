@@ -47,14 +47,11 @@ const App: React.FC = () => {
         `${i.profile_name} ${i.company_name}`.toLowerCase().includes(filters.keyword.toLowerCase())
       );
 
-    // Placeholder for other boolean flags (if mapped in your API response)
     if (filters.jobOffer)
       result = result.filter((i) => i.is_ppo);
 
     if (filters.forWomen)
       result = result.filter((i) => i.labels_app_in_card.includes("internships for women"));
-
-    // fastResponse, earlyApplicant would depend on backend support — currently ignored
 
     setFilteredInternships(result);
   }, [filters, internships]);
@@ -64,10 +61,10 @@ const App: React.FC = () => {
       <ToastContainer position={"bottom-right"} />
       <div className="flex justify-center flex-col items-center">
         <Header />
-        <div className="flex md:w-[956px]">
+        <div className="flex lg:w-[956px] justify-start">
           <span className="text-sm mt-5 p-10 flex items-center">Home&nbsp; {">"} &nbsp;Internships</span>
         </div>
-        <main className="flex flex-col md:flex-row md:w-[956px]">
+        <main className="flex flex-col lg:flex-row lg:w-[956px]">
           <FilterSidebar filters={filters} setFilters={setFilters} />
           <Internships internships={filteredInternships} />
         </main>

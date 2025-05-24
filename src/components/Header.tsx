@@ -42,10 +42,10 @@ const Header: React.FC = () => {
     };
 
     return (
-        <header className="sticky top-0 z-50 bg-white  shadow-sm px-4 md:px-8 py-3 flex justify-center items-center w-screen">
-            <div className=" bg-white flex justify-between items-center w-screen max-w-[1224px]">
+        <header className="sticky top-0 z-50 bg-white  shadow-sm px-4 md:px-8 py-3 flex lg:justify-center items-center w-full">
+            <div className=" bg-white flex justify-between items-center lg:w-[1224px]">
                 {/* Logo */}
-                <div className="flex items-center gap-2 justify-center">
+                <div className="flex items-center gap-2 justify-start">
                     {/* Mobile Hamburger Icon */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

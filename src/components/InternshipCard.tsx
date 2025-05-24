@@ -49,9 +49,9 @@ const InternshipCard: React.FC<InternshipCardProps> = ({ internship }) => {
 
     return (
         <motion.div
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.1 }}
             whileHover={{ scale: 1.01 }}
-            className="bg-white p-4 m-2 cursor-pointer rounded-2xl shadow-sm hover:shadow-md transition w-full flex relative justify-between items-center "
+            className="bg-white p-4 my-4  cursor-pointer rounded-2xl shadow-sm hover:shadow-md transition w-full flex relative justify-between items-center "
         >
             <div className="flex flex-col gap-2 w-full">
                 {/* Title & Company */}
