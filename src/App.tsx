@@ -8,7 +8,7 @@ import Internships from "./components/Internships";
 
 const App: React.FC = () => {
   const { internships } = useInternships();
-  const [filteredInternships, setFilteredInternships] = useState<Internship[]>([]);
+  const [filteredInternships, setFilteredInternships] = useState<Internship[]>(internships);
   const [filters, setFilters] = useState<Filters>({
     workFromHome: false,
     partTime: false,

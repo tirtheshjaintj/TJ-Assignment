@@ -230,7 +230,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ filters, setFilters, prof
     setFilters({
       workFromHome: false,
       partTime: false,
-      stipend: 0,
+      stipend: 10000,
       startDate: "",
       duration: "",
       jobOffer: false,

@@ -28,7 +28,7 @@ const InternshipModal: React.FC<InternshipModalProps> = ({ internship, onClose }
     </span>
   );
 
-  return (
+  return (  
     <AnimatePresence>
       {internship && (
         <motion.div

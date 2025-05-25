@@ -14,7 +14,7 @@ const InternshipContext = createContext<InternshipContextType | undefined>(undef
 
 export const InternshipProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [internships, setInternships] = useState<Internship[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const fetchInternships = async () => {
     try {
@@ -36,7 +36,6 @@ export const InternshipProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
       setInternships(internships);
       toast.success(`Fetched ${internships.length} Internships`);
-
     } catch (err) {
       toast.error("Failed to fetch internships");
       console.error("Failed to fetch internships:", err);

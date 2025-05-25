@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import InternshipCard from "../components/InternshipCard";
 import NoResults from "../components/NoResults";
 import Loader from "../components/Loader";
@@ -13,7 +13,7 @@ interface InternshipsProps {
 const Internships: React.FC<InternshipsProps> = ({ internships }) => {
   const { loading } = useInternships();
   const [selectedInternship, setSelectedInternship] = useState<Internship | null>(null);
-
+ 
   return (
     <div className="flex-1 w-full lg:flex-2/3 px-3 relative">
       {/* Loader */}
