@@ -88,6 +88,7 @@ const TagInput: React.FC<TagInputProps> = ({
         placeholder={placeholder}
         allowUnique
         allowDragDrop
+        autoFocus={false}
         classNames={{
           tags: "tags-container",
           tagInput: "tag-input-field",

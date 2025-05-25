@@ -5,6 +5,7 @@ A high-fidelity, fully-responsive clone of the Internshala Internship Search Pag
 > Developed by **Tirthesh Jain**
 
 ---
+## Live URL: [https://tirtheshjaininternshala.netlify.app/](https://tirtheshjaininternshala.netlify.app/)
 
 ## 🚀 Tech Stack
 
@@ -36,14 +37,9 @@ A high-fidelity, fully-responsive clone of the Internshala Internship Search Pag
 
 - 🎨 **Smooth UI Transitions**  
   Filter animations powered by Framer Motion for an engaging user experience.
-
-<<<<<<< HEAD
-- ⚡ **Optimized Performance**  
-  Efficient rendering using React hooks like `useMemo` to minimize unnecessary re-renders.
-=======
+  
 - 🌙 **Dark Mode Support**  
   Seamless toggle between light and dark themes for better user experience.
->>>>>>> 7322094bda3e67b4b4f6a7375a02934c30e87f0c
 
 - 🧠 **Type-Safe Codebase**  
   Robust and scalable interface definitions using TypeScript ensure maintainability.
@@ -60,27 +56,16 @@ cd TJ-Assignment
 ```
 ---
 
-<<<<<<< HEAD
-# Create a .env file in the root directory with the following content:
-=======
 ## Create a .env file in the root directory with the following content:
->>>>>>> 7322094bda3e67b4b4f6a7375a02934c30e87f0c
 ```bash
 VITE_BACKEND_URL=/api
 VITE_MODE=development
 ```
-<<<<<<< HEAD
-# Install dependencies and start the development server:
-=======
 ## Install dependencies and start the development server:
->>>>>>> 7322094bda3e67b4b4f6a7375a02934c30e87f0c
 ```bash
 npm install
 npm run dev
 ```
-<<<<<<< HEAD
-# Open http://localhost:5173 in your browser.
-=======
+
 ## Open in your browser [http://localhost:5173](http://localhost:5173)
->>>>>>> 7322094bda3e67b4b4f6a7375a02934c30e87f0c
 

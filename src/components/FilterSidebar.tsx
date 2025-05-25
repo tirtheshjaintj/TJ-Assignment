@@ -79,9 +79,9 @@ const FilterContent: React.FC<FilterContentProps> = ({
       {/* Stipend */}
       <div className="mb-4">
         <label className="block text-sm font-medium mb-1">
-          Desired minimum monthly stipend (₹)
+          Desired Min. Monthly Stipend (₹)
         </label>
-        <div className="text-base mt-1">₹{filters.stipend}</div>
+        <div className="text-base mt-1">₹{(10000-filters.stipend)}</div>
         <input
           type="range"
           name="stipend"
@@ -90,14 +90,14 @@ const FilterContent: React.FC<FilterContentProps> = ({
           step="1000"
           value={filters.stipend}
           onChange={handleInputChange}
-          className="w-full accent-blue-500"
+          className="w-full accent-blue-500 rotate-180"
         />
       </div>
 
       {/* View More */}
       <button
         onClick={() => setShowMoreFilters(!showMoreFilters)}
-        className="flex items-center text-blue-600 dark:text-white text-sm my-5"
+        className="flex items-center font-bold text-blue-600 dark:text-white text-sm my-5"
       >
         {showMoreFilters ? (
           <>
@@ -147,7 +147,7 @@ const FilterContent: React.FC<FilterContentProps> = ({
           </div>
 
           {/* Extra Checkboxes */}
-          {(["jobOffer", "fastResponse", "earlyApplicant", "forWomen"] as (keyof Filters)[]).map(
+          {(["jobOffer", "forWomen", "fastResponse", "earlyApplicant"] as (keyof Filters)[]).map(
             (key) => (
               <label key={key} className="flex items-center mb-2 capitalize">
                 <input

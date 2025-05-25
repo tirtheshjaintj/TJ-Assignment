@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const [filters, setFilters] = useState<Filters>({
     workFromHome: false,
     partTime: false,
-    stipend: 0,
+    stipend: 10000,
     startDate: "",
     duration: "",
     jobOffer: false,
@@ -35,8 +35,8 @@ const App: React.FC = () => {
     if (filters.partTime){
       result = result.filter((i) => i.part_time);
     }
-    if (filters.stipend > 0){
-      result = result.filter((i) => i.stipend.salaryValue1 >= filters.stipend);
+    if (filters.stipend >=0){
+      result = result.filter((i) => i.stipend.salaryValue1 >= (10000-filters.stipend));
     }
     if (filters.startDate){
       result = result.filter((i) => new Date(i.start_date1) >= new Date(filters.startDate));
@@ -49,7 +49,7 @@ const App: React.FC = () => {
 
     if (filters.keyword){
       result = result.filter((i) =>
-        `${i.profile_name} ${i.company_name}`.toLowerCase().includes(filters.keyword.toLowerCase())
+        `${i.profile_name} ${i.company_name} ${i.title} `.toLowerCase().includes(filters.keyword.toLowerCase())
       );
     }
 
@@ -96,7 +96,7 @@ const App: React.FC = () => {
         <div className="flex w-full lg:w-[956px] justify-start">
           <span className="text-sm mt-5 p-3 md:p-10 flex items-center">Home&nbsp; {">"} &nbsp;Internships</span>
         </div>
-        <main className="flex flex-col lg:flex-row lg:w-[956px]">
+        <main className="flex flex-col w-full lg:flex-row lg:w-[956px]">
           <FilterSidebar filters={filters} setFilters={setFilters} profiles={profileSuggestion} locations={locationSuggestion}/>
           <Internships internships={filteredInternships} />
         </main>
