@@ -17,7 +17,8 @@ A high-fidelity, fully-responsive clone of the Internshala Internship Search Pag
 - **Framer Motion** – Smooth UI animations  
 - **React Icons** – Iconography  
 - **React Toastify** – Toast notifications  
-- **Context API** – State management  
+- **Context API** – State management
+- **PWA** - It is a Progressive Web App and can be installed as an App
 
 ---
 
@@ -37,9 +38,6 @@ A high-fidelity, fully-responsive clone of the Internshala Internship Search Pag
 
 - 🎨 **Smooth UI Transitions**  
   Filter animations powered by Framer Motion for an engaging user experience.
-  
-- 🌙 **Dark Mode Support**  
-  Seamless toggle between light and dark themes for better user experience.
 
 - 🧠 **Type-Safe Codebase**  
   Robust and scalable interface definitions using TypeScript ensure maintainability.
