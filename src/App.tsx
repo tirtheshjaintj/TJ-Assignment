@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useInternships } from "./context/InternshipProvider";
 import type { Filters, Internship } from "./types";
 import { ToastContainer } from "react-toastify";
@@ -22,8 +22,6 @@ const App: React.FC = () => {
     profiles:[],
     locations:[]
   });
-  const [profileSuggestion,setProfileSuggestion]=useState<string[]>([]);
-  const [locationSuggestion,setLocationSuggestion]=useState<string[]>([]);
 
   const filteredInternships = useMemo<Internship[]>(() => {
     let result = internships;
@@ -68,20 +66,22 @@ const App: React.FC = () => {
     return result;
   }, [filters, internships]);
 
-  useEffect(() => {
+  const { profileSuggestion, locationSuggestion } = useMemo(() => {
     const tempProfiles = new Set<string>();
     const tempLocations = new Set<string>();
   
     internships.forEach((internship) => {
       tempProfiles.add(internship.profile_name);
-      internship.location_names.forEach(location => tempLocations.add(location));
+      internship.location_names.forEach((location) => tempLocations.add(location));
     });
   
-    setLocationSuggestion(Array.from(tempLocations));
-    setProfileSuggestion(Array.from(tempProfiles));
+    return {
+      profileSuggestion: Array.from(tempProfiles),
+      locationSuggestion: Array.from(tempLocations),
+    };
   }, [internships]);
   
-
+  
   return (
     <>
       <ToastContainer position={"bottom-right"} />
